@@ -1,0 +1,26 @@
+Загрузка eBPF-кода в ядро на интерфейс lo:
+    -> sudo xdp-loader load -m skb lo xdp_pass_kern.o
+
+Просмотр установленного eBPF-кода в ядро на интерфейс lo:
+    -> sudo xdp-loader status lo
+    -> sudo ip link show dev lo
+
+Просмотр установленного eBPF-кода в ядро на интерфейс enp0s3:
+    -> sudo xdp-loader status enp0s3
+    -> sudo ip link show dev enp0s3
+
+Удаление установленного eBPF-кода в ядро на интерфейс lo:
+    -> sudo ip link set dev lo xdpgeneric off
+
+Просмотр eBPF-мапы по имени: 
+    -> sudo bpftool map dump name trap_ips_map2
+
+Вставляем значение в eBPF-мапу:
+    -> sudo bpftool map update name target_ip_map key 0x0 0x0 0x0 0x0 value 0xc0 0x91 0x22 0x38
+
+Логи из eBPF-кода (прямая трансляция):
+    -> sudo cat /sys/kernel/debug/tracing/trace_pipe
+
+
+sudo env INTERFACE=enp0s3 TRAP_IP=192.168.45.67 ./loader
+
