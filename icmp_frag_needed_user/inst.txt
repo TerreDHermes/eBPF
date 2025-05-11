@@ -1,0 +1,4 @@
+sudo ./icmp_frag_needed enp0s3
+
+gcc icmp_frag_needed_user.c -o icmp_frag_needed -lpcap
+
